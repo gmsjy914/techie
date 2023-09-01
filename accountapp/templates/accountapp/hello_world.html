@@ -10,6 +10,16 @@
         Registration
     </h2>
 
+    <div class="my-4">
+        <form action="/accounts/hello_world/" method="post">
+            {% csrf_token %}
+            <input type="text" name="email">
+            <button type="submit">
+               Surmit
+            </button>
+        </form>
+    </div>
+
     <div  style="font-family: 'Black Ops One', cursive;">
         {{ temp }}
     </div>
