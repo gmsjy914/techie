@@ -13,17 +13,21 @@
     <div class="my-4">
         <form action="/accounts/hello_world/" method="post">
             {% csrf_token %}
-            <input type="text" name="email">
+            <div class="row mb-3" style="max-width: 900px; margin: auto;">
+              <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+              <div class="col-sm-10">
+                <input type="email" name="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm">
+              </div>
+            </div>
             <button type="submit">
                Surmit
             </button>
         </form>
     </div>
 
-    <div  style="font-family: 'Black Ops One', cursive;">
+    <div>
         {{ temp }}
     </div>
-
 </div>
 {% endblock %}
 
