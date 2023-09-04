@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="my-5 text-center">
+    <div>
+        <h1>
+            SignUp
+        </h1>
+    </div>
+    <div>
+        <form action="{% url 'accountapp:create' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <bitton class="btn btn-warning rounded-pill px-4"
+                    type="submit">
+                Submit
+            </bitton>
+
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
