@@ -28,6 +28,15 @@
     <div>
         {{ temp }}
     </div>
+
+    <div>
+        {% for reg in reg_all %}
+
+            <p>
+                {{ reg.email }}
+            </p>
+
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
-
