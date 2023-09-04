@@ -5,10 +5,29 @@
         </h1>
     </div>
     <div style="font-family: 'Black Ops One', cursive;">
-        <span>nav1</span>
-        <span>nav2</span>
-        <span>nav3</span>
-        <span>nav4</span>
+        <span>매인</span>
+        <span>카테고리</span>
+        <span>강다니엘</span>
+        {% if user.is_authenticated %}
+
+                <span>
+            <a href="{% url 'accountapp:logout' %}">
+                SignOut
+
+        </a></span>
+        {% else %}
+        <span>
+            <a href="{% url 'accountapp:login' %}">
+                LogIn
+            </a>
+        </span>
+
+        <span>
+            <a href="{% url 'accountapp:create' %}">
+                SignUp
+            </a>
+        </span>
+        {% endif %}
     </div>
 </div>
 
