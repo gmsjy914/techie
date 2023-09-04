@@ -2,19 +2,19 @@
 
 {% load bootstrap4 %}
 
-
 {% block content %}
+
 
 <div class="my-5 text-center">
     <div class="my-5">
         <h1>
-            SignUp
+            Login
         </h1>
     </div>
 
 
     <div style="max-width: 900px; margin: auto">
-        <form action="{% url 'accountapp:create' %}" method="post">
+        <form action="{% url 'accountapp:login' %}" method="post">
             {% csrf_token %}
             {% bootstrap_form form %}
             <button class="btn btn-warning rounded-pill px-4"
