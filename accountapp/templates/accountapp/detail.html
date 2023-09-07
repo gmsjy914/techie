@@ -48,11 +48,21 @@
             <div class="btn btn-dark rounded-pill px-5 my-5">
                 Update
             </div>
+            </a>
             {% endif %}
         </a>
         {% endif %}
 
     </div>
+
+
+    <div>
+        <a href="{% url 'articleapp:create' %}"
+           class="btn btn-primary rounded-pill px-5 my-5">
+           Article create
+        </a>
+    </div>
+
 </div>
 
 
