@@ -20,8 +20,11 @@ class ArticleCreateView(CreateView):
     form_class = ArticleForm
     template_name = 'articleapp/create.html'
 
+    def get_success_url(self):
+        from django.urls import reverse
+        return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
-class ArticleFetailView(DetailView):
+class ArticleDetailView(DetailView):
     model = Article
     context_object_name = 'tergat_article'
     template_name = 'articleapp.detail.html'
