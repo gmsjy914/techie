@@ -21,6 +21,10 @@ class ArticleCreateView(CreateView):
     form_class = ArticleForm
     template_name = 'articleapp/create.html'
 
+    def form_valid(self, form):
+        form.instance.writer = self.request.user
+        return super().form_valid(form)
+
     def get_success_url(self):
         from django.urls import reverse
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
@@ -36,7 +40,7 @@ class ArticleDetailView(DetailView):
 class ArticleUpdateView(UpdateView):
     model = Article
     form_class = ArticleForm
-    context_object_name = 'articleapp/update.html'
+    context_object_name = 'target_article'
     template_name = 'articleapp/update.html'
 
     def get_success_url(self):
