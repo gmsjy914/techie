@@ -9,13 +9,26 @@
     <div>
         <img src="{{ target_user.profile.image.url }}"
          style="height: 15rem; width: 15rem; border-radius: 100rem; object-fit: cover;">
+
+        {% if target_user.profile %}
         <h1>
             {{ target_user.profile.nickname }}
         </h1>
-    <h1>
+        <h1>
             {{ target_user.profile.message }}
         </h1>
 
+        {% elif target_user == user %}
+        <a href="{% url 'profileapp:create' %}">
+            <h1>
+                Create Profile
+            </h1>
+        </a>
+        {% else %}
+        <h1>
+            Unknown
+        </h1>
+        {% endif %}
     </div>
 
 
@@ -30,10 +43,12 @@
             <div class="btn btn-warning rounded-pill px-5 my-5">
                 Update
             </div>
+            {% if target_user.profile %}
             <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
             <div class="btn btn-dark rounded-pill px-5 my-5">
                 Update
             </div>
+            {% endif %}
         </a>
         {% endif %}
 

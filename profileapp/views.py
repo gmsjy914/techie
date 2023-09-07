@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
 
+from profileapp.decorators import porfile_ownership_required
 from profileapp.forms import ProfileForm
 from profileapp.models import Profile
 
@@ -20,7 +22,8 @@ class ProfileCreateView(CreateView):
         return reverse('accountapp:detail',
                        kwargs={'pk': self.request.user.pk})
 
-
+@method_decorator(porfile_ownership_required, 'get')
+@method_decorator(porfile_ownership_required, 'post')
 class ProfileUpdateView(UpdateView):
     model = Profile
     form_class = ProfileForm
