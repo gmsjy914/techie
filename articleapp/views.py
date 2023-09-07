@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 
+from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleForm
 from articleapp.models import Article
 
@@ -26,5 +27,18 @@ class ArticleCreateView(CreateView):
 
 class ArticleDetailView(DetailView):
     model = Article
-    context_object_name = 'tergat_article'
-    template_name = 'articleapp.detail.html'
+    context_object_name = 'target_article'
+    template_name = 'articleapp/detail.html'
+
+
+@method_decorator(article_ownership_required, 'get')
+@method_decorator(article_ownership_required, 'post')
+class ArticleUpdateView(UpdateView):
+    model = Article
+    form_class = ArticleForm
+    context_object_name = 'articleapp/update.html'
+    template_name = 'articleapp/update.html'
+
+    def get_success_url(self):
+        from django.urls import reverse
+        return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
