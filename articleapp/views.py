@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleForm
@@ -14,6 +14,15 @@ from articleapp.models import Article
 
 class TempView(TemplateView):
     template_name = 'articleapp/temp.html'
+
+
+class ArticleListView(ListView):
+    model = Article
+    context_object_name = 'article_list'
+    template_name = 'articleapp/list.html'
+    paginate_by = 20
+
+
 
 @method_decorator(login_required, 'get')
 @method_decorator(login_required, 'post')
@@ -54,4 +63,4 @@ class ArticleDeleteView(DeleteView):
     model = Article
     context_object_name = 'target_article'
     template_name = 'articleapp/delete.html'
-    success_url = reverse_lazy('accountapp:hello)world')
+    success_url = reverse_lazy('accountapp:hello_world')

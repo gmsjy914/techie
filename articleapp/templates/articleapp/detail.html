@@ -10,18 +10,44 @@
         <h1>
             {{ target_article.title }}
         </h1>
+        <p>
+            {{ target_article.created_at }}
+        </p>
     </div>
+
+    <div>
+        <span style="color: #f77"
+                class="material-symbols-outlined">
+            favorite
+        </span>
+        <span style="vertical-align: top;">
+            {{ target_article.like }}
+        </span>
+    </div>
+
+    <div class="my-5">
+        <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
+            <img style="width: 2.5rem; height: 2.5rem; object-fit: cover; border-radius: 50%;"
+                    src="{{ target_article.writer.profile.image.url }}" alt="">
+            <span>
+                {{ target_article.writer.profile.nickname }}
+            </span>
+        </a>
+    </div>
+
+
+    <hr class="my-5">
 
 
     <div style="max-width: 900px; margin: auto">
 
         <div>
-            <img src="{{ target_article.image.url }}">
+            <img style="width: 100%; border-radius: 3rem;"
+                    src="{{ target_article.image.url }}">
         </div>
-        <div>
-            {{ target_article.content }}
+        <div class="text-start my-5">
+            {{ target_article.content|linebreaks }}
         </div>
-
 
 
     </div>
