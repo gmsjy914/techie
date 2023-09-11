@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleForm
@@ -46,3 +47,11 @@ class ArticleUpdateView(UpdateView):
     def get_success_url(self):
         from django.urls import reverse
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
+
+@method_decorator(article_ownership_required, 'get')
+@method_decorator(article_ownership_required, 'post')
+class ArticleDeleteView(DeleteView):
+    model = Article
+    context_object_name = 'target_article'
+    template_name = 'articleapp/delete.html'
+    success_url = reverse_lazy('accountapp:hello)world')
