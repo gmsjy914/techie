@@ -100,6 +100,19 @@
                 <div class="my-3">
                     {{ comment.content|linebreaks }}
                 </div>
+                {% if user == comment.writer %}
+                <div class="text-end">
+                    <a class="btn btn-warning btn-sm rounded-pill px-4 py-0"
+                       href="{% url 'commentapp:update' pk=comment.pk %}">
+                        Update
+                    </a>
+
+                    <a class="btn btn-danger btn-sm rounded-pill px-4 py-0"
+                       href="{% url 'commentapp:delete' pk=comment.pk %}">
+                        Delete
+                    </a>
+                </div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
