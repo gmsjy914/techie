@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="my-5 text-center">
+<div class="my-5 text-center"  style="max-width: 900px; margin: auto">
     <div class="my-5">
         <h1>
             {{ target_article.title }}
@@ -26,6 +26,7 @@
     </div>
 
     <div class="my-5">
+        {% if target_article.writer %}
         <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
             <img style="width: 2.5rem; height: 2.5rem; object-fit: cover; border-radius: 50%;"
                     src="{{ target_article.writer.profile.image.url }}" alt="">
@@ -33,13 +34,24 @@
                 {{ target_article.writer.profile.nickname }}
             </span>
         </a>
+        {% else %}
+        <h5>
+            Unknown
+        </h5>
+        {% endif %}
+
+        <hr class="my-5">
+
+        <div>
+
+        </div>
     </div>
 
 
     <hr class="my-5">
 
 
-    <div style="max-width: 900px; margin: auto">
+    <div>
 
         <div>
             <img style="width: 100%; border-radius: 3rem;"
@@ -48,8 +60,6 @@
         <div class="text-start my-5">
             {{ target_article.content|linebreaks }}
         </div>
-
-
     </div>
 
     {% if user == target_article.writer %}
@@ -65,6 +75,15 @@
         </a>
     </div>
     {% endif %}
+
+
+    <div class="text-start">
+        <h3>
+            Comments
+        </h3>
+        {% include 'commentapp/create.html' %}
+    </div>
+
 </div>
 
 

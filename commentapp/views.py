@@ -17,6 +17,7 @@ class CommentCreateView(CreateView):
     
     def form_valid(self, form):
         form.instance.writer = self.request.user
+        form.instance.article_id = self.request.POST.get('article_pk')
         return super().form_valid(form)
     
     def get_success_url(self):

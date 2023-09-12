@@ -1,16 +1,6 @@
-{% extends 'base.html' %}
+
 
 {% load bootstrap4 %}
-
-
-{% block content %}
-
-<div class="my-5 text-center">
-    <div class="my-5">
-        <h1>
-            Comment Create
-        </h1>
-    </div>
 
 
     <div style="max-width: 900px; margin: auto">
@@ -19,14 +9,16 @@
               enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
-            <button class="btn btn-warning rounded-pill px-4"
+
+            <input type="hidden"
+                   name="article_pk"
+                   value="{{ target_article.pk }}">
+
+            <div class="">
+                <button class="btn btn-warning rounded-pill px-5 my-2"
                     type="submit">
                 Submit
             </button>
-
+            </div>
         </form>
     </div>
-</div>
-
-
-{% endblock %}
