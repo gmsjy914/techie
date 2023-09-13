@@ -11,10 +11,12 @@
                 List
             </a>
         </span>
-        
-        <span>매인</span>
-        <span>카테고리</span>
-        <span>강다니엘</span>
+
+        <span>
+            <a href="{% url 'subscribeapp:list' %}">
+                Subscription
+            </a>
+        </span>
         {% if user.is_authenticated %}
 
                 <span>
