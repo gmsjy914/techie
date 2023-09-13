@@ -28,6 +28,7 @@ urlpatterns = [
     path('profiles/', include('profileapp.urls')),
     path('articles/', include('articleapp.urls')),
     path('comments/', include('commentapp.urls')),
+    path('subscribe/', include('subscribeapp.urls')),
 
     path( '', hello_world)
 
