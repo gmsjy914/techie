@@ -12,6 +12,7 @@ from django.views.generic.list import MultipleObjectMixin
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import Registration
 from articleapp.models import Article
+from subscribeapp.models import Subscription
 
 
 # Create your views here.
@@ -62,7 +63,9 @@ class AccountDetailView(DetailView, MultipleObjectMixin):
     def get_context_data(self, **kwargs):
         object_list = Article.objects.filter(writer=self.object)
 
-        return super().get_context_data(object_list=object_list, **kwargs)
+        subscribed = Subscription.objects.filter(user=self.request.user, target_user=self.object)
+
+        return super().get_context_data(object_list=object_list, subscribed=subscribed, **kwargs)
 
 
 

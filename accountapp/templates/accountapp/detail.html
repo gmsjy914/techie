@@ -43,6 +43,7 @@
             <div class="btn btn-warning rounded-pill px-5 my-5">
                 Update
             </div>
+            </a>
             {% if target_user.profile %}
             <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
             <div class="btn btn-dark rounded-pill px-5 my-5">
@@ -51,6 +52,23 @@
             </a>
             {% endif %}
         </a>
+        {% else %}
+
+        {% if not subscribed %}
+        <a href="{% url 'subscribeapp:sub' pk=target_user.pk %}">
+            <div class="btn btn-dark rounded-pill px-5 my-5">
+                Subscribe
+            </div>
+        </a>
+        {% else %}
+        <a href="{% url 'subscribeapp:sub' pk=target_user.pk %}">
+            <div class="btn btn-secondary rounded-pill px-5 my-5">
+                Unsubscribe
+            </div>
+        </a>
+        {% endif %}
+
+
         {% endif %}
 
     </div>
