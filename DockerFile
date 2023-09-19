@@ -14,7 +14,7 @@ RUN pip install mysqlclient
 
 EXPOSE 8000
 
-CMD ["bash", "-c", "python manage.py collectstatic --noinput --settings=techit.settings.deploy && python manage.py migrate --settings=techit.settings.deploy && gunicorn --env DJANGO_SETTINGS_MODULE=techit.settings.deploy techit.wsgi techit.wsgi --bind 0.0.0.0:8000"]
+CMD ["bash", "-c", "python manage.py collectstatic --noinput --settings=techit.settings.deploy && python manage.py migrate --settings=techit.settings.deploy && gunicorn --env DJANGO_SETTINGS_MODULE=techit.settings.deploy techit.wsgi --bind 0.0.0.0:8000"]
 
 
 
