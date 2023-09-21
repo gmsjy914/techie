@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: nginx:1.24.0
+    ports:
+      - 80:80
+    networks:
+      - nginx_django
+    volumes:
+      - /home/ubuntu/techit/nginx.conf:/etc/nginx/nginx.conf
+      - media-volume:/data/media/
+      - static-volume:/data/static/
+
+  django:
+    image: techitdjango:0.0.5
+    networks:
+      - nginx_django
+    volumes:
+      - media-volume:/home/ubuntu/media/
+      - static-volume:/home/ubuntu/staticfiles/
+
+  mariadb:
+    image: mariadb:11.0
+    networks:
+      - nginx_django
+    volumes:
+      - mariadb-volume:/var/lib/mysql/
+    environment:
+      MARIADB_USER: django
+      MARIADB_PASSWORD: ps123123
+      MARIADB_ROOT_PASSWORD: ps123123
+      MARIADB_DATABASE: mariadb
+
+
+networks:
+  nginx_django:
+
+volumes:
+  media-volume:
+  static-volume:
+  mariadb-volume:
+
