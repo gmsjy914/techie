@@ -19,6 +19,11 @@ services:
     volumes:
       - media-volume:/home/ubuntu/media/
       - static-volume:/home/ubuntu/staticfiles/
+    secrets:
+      - MARIADB_USER
+      - MARIADB_PASSWORD
+      - MARIADB_ROOT_PASSWORD
+      - MARIADB_DATABASE
 
   mariadb:
     image: mariadb:11.0
@@ -27,10 +32,15 @@ services:
     volumes:
       - mariadb-volume:/var/lib/mysql/
     environment:
-      MARIADB_USER: django
-      MARIADB_PASSWORD: ps123123
-      MARIADB_ROOT_PASSWORD: ps123123
-      MARIADB_DATABASE: mariadb
+      MARIADB_USER_FILE: /run/secrets/MARIADB_USER
+      MARIADB_PASSWORD_FILE: /run/secrets/MARIADB_PASSWORD
+      MARIADB_ROOT_PASSWORD: /run/secrets/MARIADB_ROOT_PASSWORD
+      MARIADB_DATABASE: /run/secrets/MARIADB_DATABASE
+    secrets:
+      - MARIADB_USER
+      - MARIADB_PASSWORD
+      - MARIADB_ROOT_PASSWORD
+      - MARIADB_DATABASE
 
 
 networks:
@@ -40,4 +50,15 @@ volumes:
   media-volume:
   static-volume:
   mariadb-volume:
+
+secrets:
+  MARIADB_USER:
+    external: true
+  MARIADB_PASSWORD:
+    external: true
+  MARIADB_ROOT_PASSWORD:
+    external: true
+  MARIADB_DATABASE:
+    external: true
+
 

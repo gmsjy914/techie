@@ -1,6 +1,14 @@
 from .base import *
 
 
+def read_secrt(secret_name):
+    file = open('/run/secrets/' + secret_name)
+    secret = file.read()
+    secret = secret.lstrip().rstrip()
+    file.close()
+    return secret
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -19,9 +27,9 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "mariadb",
-        "USER": "django",
-        "PASSWORD": "ps123123",
+        "NAME": read_secrt("MARIADB_DATABASE"),
+        "USER": read_secrt("MARIADB_USER"),
+        "PASSWORD": read_secrt("MARIADB_PASSWORD"),
         "HOST": "mariadb",
         "PORT": "3306",
     }
