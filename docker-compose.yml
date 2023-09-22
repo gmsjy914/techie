@@ -13,12 +13,17 @@ services:
       - static-volume:/data/static/
 
   django:
-    image: techitdjango:0.0.5
+    image: techitdjango:0.0.6
     networks:
       - nginx_django
     volumes:
       - media-volume:/home/ubuntu/media/
       - static-volume:/home/ubuntu/staticfiles/
+    secrets:
+      - MARIADB_USER
+      - MARIADB_PASSWORD
+      - MARIADB_ROOT_PASSWORD
+      - MARIADB_DATABASE
 
   mariadb:
     image: mariadb:11.0
@@ -31,6 +36,11 @@ services:
       MARIADB_PASSWORD: ps123123
       MARIADB_ROOT_PASSWORD: ps123123
       MARIADB_DATABASE: mariadb
+    secrets:
+      - MARIADB_USER
+      - MARIADB_PASSWORD
+      - MARIADB_ROOT_PASSWORD
+      - MARIADB_DATABASE
 
 
 networks:
@@ -40,4 +50,15 @@ volumes:
   media-volume:
   static-volume:
   mariadb-volume:
+
+secrets:
+  MARIADB_USER:
+    external: true
+  MARIADB_PASSWORD:
+    external: true
+  MARIADB_ROOT_PASSWORD:
+    external: true
+  MARIADB_DATABASE:
+    external: true
+
 
